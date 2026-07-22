@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "zalithmusicplayer",
+  "version": "${version}",
+  "name": "ZalithMusicPlayer",
+  "description": "Local MP3 player for ZalithLauncher2 / Fabric.",
+  "authors": ["ProSteve123GH", "OpenAI"],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.prosteve123gh.zalithmusicplayer.client.MusicPlayerClient"
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "fabric-api": "*",
+    "minecraft": "26.2"
+  }
+}
