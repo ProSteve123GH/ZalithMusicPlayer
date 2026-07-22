@@ -132,11 +132,12 @@ public final class LocalMusicPlayer {
         tracks.clear();
         try {
             if (Files.exists(musicRoot)) {
-                Files.walk(musicRoot)
-                        .filter(Files::isRegularFile)
-                        .filter(path -> path.getFileName().toString().toLowerCase().endsWith(".mp3"))
-                        .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase()))
-                        .forEach(path -> tracks.add(new MusicTrack(path, stripExtension(path.getFileName().toString()))));
+                try (var stream = Files.walk(musicRoot)) {
+                    stream.filter(Files::isRegularFile)
+                            .filter(path -> path.getFileName().toString().toLowerCase().endsWith(".mp3"))
+                            .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase()))
+                            .forEach(path -> tracks.add(new MusicTrack(path, stripExtension(path.getFileName().toString()))));
+                }
             }
             lastStatus = tracks.isEmpty()
                     ? "No MP3 files found in " + musicRoot

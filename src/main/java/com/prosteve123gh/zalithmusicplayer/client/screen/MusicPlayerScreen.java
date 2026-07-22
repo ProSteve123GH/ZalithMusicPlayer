@@ -79,18 +79,19 @@ public final class MusicPlayerScreen extends Screen {
         int start = page * PAGE_SIZE;
         int end = Math.min(tracks.size(), start + PAGE_SIZE);
 
-        if (start >= tracks.size() && !tracks.isEmpty()) {
+        if (start >= tracks.size()) {
             openPage(Math.max(0, (tracks.size() - 1) / PAGE_SIZE));
             return;
         }
 
         for (int i = start; i < end; i++) {
-            MusicTrack track = tracks.get(i);
-            int row = i - start;
+            int trackIndex = i;
+            MusicTrack track = tracks.get(trackIndex);
+            int row = trackIndex - start;
             int y = LIST_START_Y + (row * LIST_ROW_HEIGHT);
 
-            addDrawableChild(ButtonWidget.builder(Text.literal((i + 1) + ". " + track.title()), button -> {
-                player.playIndex(i);
+            addDrawableChild(ButtonWidget.builder(Text.literal((trackIndex + 1) + ". " + track.title()), button -> {
+                player.playIndex(trackIndex);
             }).dimensions(10, y - 2, width - 20, 16).build());
         }
     }
