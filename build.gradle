@@ -1,11 +1,12 @@
 plugins {
     id 'fabric-loom' version '1.17.16'
     id 'maven-publish'
+    id 'base'
 }
 
 group = project.maven_group
 version = project.mod_version
-archivesBaseName = project.archives_base_name
+base.archivesName.set(project.archives_base_name)
 
 repositories {
     mavenCentral()
